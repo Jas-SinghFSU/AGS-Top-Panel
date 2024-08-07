@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { type Application } from "types/service/applications"
+import { NotificationAnchor } from "./types/options"
+import { OSDAnchor } from "lib/types/options";
 import icons, { substitutes } from "./icons"
 import Gtk from "gi://Gtk?version=3.0"
 import Gdk from "gi://Gdk"
@@ -110,4 +112,23 @@ export function createSurfaceFromWidget(widget: Gtk.Widget) {
     cr.fill()
     widget.draw(cr)
     return surface
+}
+
+/*
+// get anchor position from option in user config.
+// currently accepts either Notification or OSD.
+*/
+export function getPosition (pos: NotificationAnchor | OSDAnchor): ("top" | "bottom" | "left" | "right")[] {
+    const positionMap: { [key: string]: ("top" | "bottom" | "left" | "right")[] } = {
+        "top": ["top"],
+        "top right": ["top", "right"],
+        "top left": ["top", "left"],
+        "bottom": ["bottom"],
+        "bottom right": ["bottom", "right"],
+        "bottom left": ["bottom", "left"],
+        "right": ["right"],
+        "left": ["left"],
+    };
+
+    return positionMap[pos] || ["top"];
 }

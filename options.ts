@@ -640,7 +640,7 @@ const options = mkOptions(OPTIONS, {
             format: opt("󰃭  %a %b %d    %I:%M:%S %p"),
         },
         notifications: {
-            show_total: opt(false)
+            show_total: opt(false),
         },
     },
 
@@ -745,6 +745,8 @@ const options = mkOptions(OPTIONS, {
 
     notifications: {
         position: opt<"top" | "top right" | "top left" | "bottom" | "bottom right" | "bottom left">("top right"),
+        monitor: opt(0),
+        active_monitor: opt(true),
         timeout: opt(7000),
         cache_actions: opt(true),
     },

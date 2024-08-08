@@ -65,7 +65,7 @@
         let
           pkgs = pkgsFor.${system};
         in
-        final: prev: { hyprpanel = (pkgs.callPackage ./. { inherit inputs; }).desktop.script; }
+        final: prev: { hyprpanel = (pkgs.callPackage ./nix/default.nix { inherit inputs; }).desktop.script; }
       );
 
       packages = forEachSystem (
@@ -74,7 +74,7 @@
           pkgs = pkgsFor.${system};
         in
         {
-          default = (pkgs.callPackage ./. { inherit inputs; }).desktop.script;
+          default = (pkgs.callPackage ./nix/default.nix { inherit inputs; }).desktop.script;
         }
       );
     };

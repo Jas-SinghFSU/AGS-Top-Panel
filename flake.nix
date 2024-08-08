@@ -17,6 +17,7 @@
 
       devShellFor = system: nixpkgs.lib.genAttrs [ "default" ] (_: nixpkgs.legacyPackages.${system}.mkShell {
         buildInputs = [
+          pkgsFor.${system}.esbuild
           pkgsFor.${system}.fish
           pkgsFor.${system}.typescript
           pkgsFor.${system}.bun

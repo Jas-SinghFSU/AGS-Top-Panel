@@ -6,8 +6,7 @@
     ags.url = "github:Aylur/ags";
   };
 
-  outputs =
-    { self, nixpkgs, ... }@inputs:
+  outputs = inputs:
     let
       systems = [
         "x86_64-linux"
@@ -15,10 +14,10 @@
         "aarch64-darwin"
         "aarch64-linux"
       ];
-      forEachSystem = nixpkgs.lib.genAttrs systems;
+      forEachSystem = inputs.nixpkgs.lib.genAttrs systems;
       pkgsFor = forEachSystem (
         system:
-        import nixpkgs {
+        import inputs.nixpkgs {
           inherit system;
           config.allowUnfree = true;
         }
@@ -26,9 +25,9 @@
 
       devShellFor =
         system:
-        nixpkgs.lib.genAttrs [ "default" ] (
+        inputs.nixpkgs.lib.genAttrs [ "default" ] (
           _:
-          nixpkgs.legacyPackages.${system}.mkShell {
+          inputs.nixpkgs.legacyPackages.${system}.mkShell {
             buildInputs = [
               pkgsFor.${system}.esbuild
               pkgsFor.${system}.fish

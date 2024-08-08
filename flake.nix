@@ -35,7 +35,7 @@
           inputs.ags.packages.${system}.agsWithTypes
         ];
         nativeBuildInputs = with pkgsFor.${system}; [
-          nixpkgs-fmt
+          nixfmt-rfc-style
           nil
         ];
         shellHook = ''

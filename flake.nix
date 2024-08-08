@@ -57,7 +57,7 @@
         );
     in
     {
-      devShells = forEachSystem (system: devShellFor system);
+      devShells = forEachSystem devShellFor;
 
       overlay = forEachSystem (
         system:
